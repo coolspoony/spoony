@@ -49,7 +49,7 @@ test { // junit 5
 def queryDslSrcDir = 'src/main/generated'
 
 querydsl {
-    library = "com.querydsl:querydsl-apt"
+    library = 'com.querydsl:querydsl-apt'
     jpa = true
     querydslSourcesDir = queryDslSrcDir
 }
