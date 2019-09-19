@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'war'
     id 'idea'
     id 'org.springframework.boot' version '2.1.8.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
@@ -11,8 +11,8 @@ version = '0.1'
 sourceCompatibility = 11
 targetCompatibility = 11
 
-bootJar.enabled = false
-jar.enabled = true
+//bootJar.enabled = false
+//jar.enabled = true
 
 repositories {
     mavenCentral()
@@ -20,6 +20,11 @@ repositories {
     maven {
         url 'https://repo.spring.io/milestone'
     }
+}
+
+ext {
+    lombokVersion = '1.18.8'
+    swaggerVersion = '2.9.2'
 }
 
 dependencies {
@@ -33,7 +38,14 @@ dependencies {
     compile('com.querydsl:querydsl-apt')
 
     // lombok
-    compile('org.projectlombok:lombok')
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
+    // swagger
+    compile("io.springfox:springfox-swagger2:${swaggerVersion}")
+    compile("io.springfox:springfox-swagger-ui:${swaggerVersion}")
 
     // test
     testImplementation('org.springframework.boot:spring-boot-starter-test')
@@ -62,7 +74,7 @@ sourceSets {
     }
 }
 
-compileQuerydsl{
+compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
 }
 
