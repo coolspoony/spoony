@@ -1,6 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
-.idea
-.gradle
+*.idea
+*.gradle
+*.iml
 build
 out
 generated
+/react-app/node_modules
